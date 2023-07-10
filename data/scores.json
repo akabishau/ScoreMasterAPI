@@ -1,0 +1,39 @@
+{
+    "scores": [
+        {
+            "id": 1,
+            "leagueId": 1,
+            "gameId": 1,
+            "userId": 1,
+            "scoreValue": 500
+        },
+        {
+            "id": 2,
+            "leagueId": 1,
+            "gameId": 1,
+            "userId": 2,
+            "scoreValue": 600
+        },
+        {
+            "id": 3,
+            "leagueId": 2,
+            "gameId": 3,
+            "userId": 3,
+            "scoreValue": 800
+        },
+        {
+            "id": 4,
+            "leagueId": 2,
+            "gameId": 3,
+            "userId": 1,
+            "scoreValue": 700
+        },
+        {
+            "id": 5,
+            "leagueId": 3,
+            "gameId": 2,
+            "userId": 2,
+            "scoreValue": 400
+        }
+    ]
+}

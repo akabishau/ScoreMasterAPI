@@ -9,8 +9,8 @@ app.get('/api/v1', (req, res) => {
 })
 
 // routes
-const userRouter = require('./routes/users')
-app.use('/api/v1/users', userRouter)
+const router = require('./src/routes')
+app.use('/api/v1', router)
 
 
 

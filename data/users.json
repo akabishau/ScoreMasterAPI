@@ -4,7 +4,7 @@
             "id": 1,
             "name": "John Doe",
             "email": "johndoe@example.com",
-            "leagues": [
+            "groups": [
                 1,
                 2
             ]
@@ -13,7 +13,7 @@
             "id": 2,
             "name": "Alice Smith",
             "email": "alicesmith@example.com",
-            "leagues": [
+            "groups": [
                 1,
                 3
             ]
@@ -22,7 +22,7 @@
             "id": 3,
             "name": "David Johnson",
             "email": "davidjohnson@example.com",
-            "leagues": [
+            "groups": [
                 2,
                 3
             ]
@@ -31,7 +31,7 @@
             "id": 4,
             "name": "Emily Brown",
             "email": "emilybrown@example.com",
-            "leagues": [
+            "groups": [
                 1
             ]
         }

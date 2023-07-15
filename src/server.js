@@ -10,6 +10,7 @@ app.get('/api/v1', (req, res) => res.send('Welcome to ScoreMaster API'))
 const router = require('./routes')
 app.use('/api/v1', router)
 
+app.use(require('./middleware/error-handler'))
 
 // db connection
 const env = process.env.NODE_ENV || 'dev'

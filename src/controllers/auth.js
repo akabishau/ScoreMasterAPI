@@ -1,48 +1,56 @@
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
     console.log('register')
     console.log(req.body)
     try {
         const user = await User.create(req.body)
         res.status(StatusCodes.CREATED).json({ user })
     } catch (err) {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: err })
+        next(err)
     }
 }
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     console.log('login')
     try {
         const { email, password } = req.body
         if (!email || !password) {
-            // upadate to throw error
-            return res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Please provide email and password' })
+            throw {
+                status: StatusCodes.BAD_REQUEST,
+                message: 'Please provide email and password'
+            }
         }
 
         const user = await User.findOne({ email })
         if (!user) {
-            return res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Invalid email' })
+            throw {
+                status: StatusCodes.BAD_REQUEST,
+                message: 'Invalid email'
+            }
         }
 
-        console.log(typeof password)
         const isPasswordCorrect = await user.isValidPassword(password)
         if (!isPasswordCorrect) {
-            return res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Invalid password' })
+            throw {
+                status: StatusCodes.BAD_REQUEST,
+                message: 'Invalid password'
+            }
         }
 
-
-        res.status(StatusCodes.OK).json({ user })
+        res.status(StatusCodes.OK).json({
+            status: 'success',
+            user: {
+                id: user._id,
+                name: user.name
+            }
+         })
 
 
     } catch (err) {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(
-            {
-                status: 'Login Failed',
-                msg: err.message
-            }
-        )
+        console.log(err)
+        next(err)
     }
 }
 

@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
         index: true
     },
     email: {
-        select: false,
+        // select: false,
         type: String,
         required: [true, 'Email is required'],
         unique: true,
@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
         trim: true
     },
     password: {
-        select: false,
+        // select: false,
         type: String,
         required: [true, 'Password is required'],
         minLength: [6, 'Password must be at least 6 characters'],

@@ -4,13 +4,18 @@
   "description": "backend service for corresponding web and mobile apps",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "author": "Aleksey Kabishau",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "http-status-codes": "^2.2.0",
+    "mongoose": "^7.3.4",
+    "validator": "^13.9.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.9"

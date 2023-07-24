@@ -6,6 +6,10 @@ const app = express()
 app.use(express.json())
 app.get('/api/v1', (req, res) => res.send('Welcome to ScoreMaster API'))
 
+// passport
+const passport = require('passport')
+app.use(passport.initialize())
+
 // routes
 const router = require('./routes')
 app.use('/api/v1', router)

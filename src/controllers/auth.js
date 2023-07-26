@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
-const generateToken = require('../lib/jwt')
+const generateTokens = require('../lib/jwt')
 
 const register = async (req, res, next) => {
     console.log('register')
@@ -40,11 +40,14 @@ const login = async (req, res, next) => {
             }
         }
 
-        const token = generateToken(user)
+        const tokens = generateTokens(user)
+
+        res.cookie('accessToken', tokens.accessToken, { httpOnly: true }) // sameSite: 'none', secure: true
+        
         
         res.status(StatusCodes.OK).json({
             status: 'success',
-            token,
+            refreshToken: tokens.refreshToken,
             user: {
                 id: user._id,
                 name: user.name

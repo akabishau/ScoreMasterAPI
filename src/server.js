@@ -4,7 +4,7 @@ require('dotenv').config()
 
 const app = express()
 app.use(express.json())
-app.get('/api/v1', (req, res) => res.send('Welcome to ScoreMaster API'))
+app.use(require('cookie-parser')()) // get accessToken from httpOnly cookie
 
 // passport
 const setupPassport = require('./lib/passport')
@@ -12,6 +12,7 @@ const passport = setupPassport() // returns passport; configure for different en
 app.use(passport.initialize())
 
 // routes
+app.get('/api/v1', (req, res) => res.send('Welcome to ScoreMaster API'))
 const router = require('./routes')
 app.use('/api/v1', router)
 

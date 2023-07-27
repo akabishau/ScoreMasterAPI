@@ -41,18 +41,19 @@ const login = async (req, res, next) => {
         }
 
         const tokens = generateTokens(user)
-
+        user.refreshToken = tokens.refreshToken
+        await user.save()
+        console.log(user)
         res.cookie('accessToken', tokens.accessToken, { httpOnly: true }) // sameSite: 'none', secure: true
-        
-        
         res.status(StatusCodes.OK).json({
             status: 'success',
             refreshToken: tokens.refreshToken,
             user: {
                 id: user._id,
-                name: user.name
+                name: user.name,
+                refreshToken: user.refreshToken
             }
-         })
+        })
 
 
     } catch (err) {

@@ -38,20 +38,47 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Password is required'],
         minLength: [6, 'Password must be at least 6 characters'],
         maxLength: [100, 'Password must be less than 100 characters']
+    },
+    refreshToken: {
+        type: String,
+        default: null,
     }
 }, { timestamps: true })
 
 
+// userSchema.pre('save', async function (next) {
+//     try {
+//         const salt = await bcrypt.genSalt(10)
+//         const hashedPassword = await bcrypt.hash(this.password, salt)
+//         this.password = hashedPassword
+//         next()
+//     } catch (err) {
+//         next(err)
+//     }
+// })
+
 userSchema.pre('save', async function (next) {
-    try {
-        const salt = await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hash(this.password, salt)
-        this.password = hashedPassword
-        next()
-    } catch (err) {
-        next(err)
+    console.log('userSchema.pre(save)')
+    // hash password before saving
+    if (this.isModified('password')) {
+        console.log('modified password')
+        try {
+            const salt = await bcrypt.genSalt(10)
+            this.password = await bcrypt.hash(this.password, salt)
+            next()
+        } catch (error) {
+            console.log(error)
+            next(error)
+        }
     }
+
+    console.log('other presave actions completed')
+    next()
 })
+
+
+
+
 
 
 userSchema.methods.isValidPassword = async function (password) {

@@ -46,17 +46,6 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 
-// userSchema.pre('save', async function (next) {
-//     try {
-//         const salt = await bcrypt.genSalt(10)
-//         const hashedPassword = await bcrypt.hash(this.password, salt)
-//         this.password = hashedPassword
-//         next()
-//     } catch (err) {
-//         next(err)
-//     }
-// })
-
 userSchema.pre('save', async function (next) {
     console.log('userSchema.pre(save)')
     // hash password before saving
@@ -65,20 +54,14 @@ userSchema.pre('save', async function (next) {
         try {
             const salt = await bcrypt.genSalt(10)
             this.password = await bcrypt.hash(this.password, salt)
-            next()
         } catch (error) {
             console.log(error)
-            next(error)
+            return next(error)
         }
     }
-
     console.log('other presave actions completed')
     next()
 })
-
-
-
-
 
 
 userSchema.methods.isValidPassword = async function (password) {

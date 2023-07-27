@@ -2,18 +2,8 @@ const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const generateTokens = require('../lib/jwt')
 
-const register = async (req, res, next) => {
-    console.log('register')
-    console.log(req.body)
-    try {
-        const user = await User.create(req.body)
-        res.status(StatusCodes.CREATED).json({ user })
-    } catch (err) {
-        next(err)
-    }
-}
 
-const login = async (req, res, next) => {
+module.exports = async (req, res, next) => {
     console.log('login')
     try {
         const { email, password } = req.body
@@ -24,7 +14,7 @@ const login = async (req, res, next) => {
             }
         }
 
-        const user = await User.findOne({ email })
+        let user = await User.findOne({ email })
         if (!user) {
             throw {
                 status: StatusCodes.BAD_REQUEST,
@@ -43,24 +33,17 @@ const login = async (req, res, next) => {
         const tokens = generateTokens(user)
         user.refreshToken = tokens.refreshToken
         await user.save()
-        console.log(user)
+
         res.cookie('accessToken', tokens.accessToken, { httpOnly: true }) // sameSite: 'none', secure: true
         res.status(StatusCodes.OK).json({
-            status: 'success',
-            refreshToken: tokens.refreshToken,
+            refreshToken: user.refreshToken,
             user: {
                 id: user._id,
                 name: user.name,
-                refreshToken: user.refreshToken
             }
         })
-
-
     } catch (err) {
-        console.log(err)
+        console.log('login controller', err)
         next(err)
     }
 }
-
-
-module.exports = { register, login }

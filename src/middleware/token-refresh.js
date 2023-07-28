@@ -12,6 +12,8 @@ module.exports = async (req, res, next) => {
             (err, user) => {
                 console.log('refreshToken callback')
                 if (err) {
+                    // if token is expired/invalid, pass error to error-handler middleware
+                    err.status = StatusCodes.UNAUTHORIZED
                     return next(err)
                 }
     

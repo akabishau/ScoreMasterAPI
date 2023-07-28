@@ -1,9 +1,8 @@
 const passport = require('passport')
-// const { Strategy, ExtractJwt } = require('passport-jwt')
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt')
 const { Strategy: BearerStrategy } = require('passport-http-bearer')
 const User = require('../models/User')
-
+const jwt = require('jsonwebtoken')
 
 module.exports = () => {
 
@@ -39,6 +38,9 @@ module.exports = () => {
     'refresh-bearer',
     new BearerStrategy({ passReqToCallback: true }, async (req, token, done) => {
       try {
+        // jwt throws an error if token is invalid or expired
+        jwt.verify(token, process.env.REFRESH_TOKEN_SECRET)
+
         const user = await User.findOne({ refreshToken: token })
         if (user) {
           return done(null, user)

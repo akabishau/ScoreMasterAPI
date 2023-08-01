@@ -6,7 +6,13 @@
 	"scripts": {
 		"start": "node src/server.js",
 		"dev": "nodemon src/server.js",
+		"prepare": "husky install",
 		"test": "node tests/test.js"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm test"
+		}
 	},
 	"author": "Aleksey Kabishau",
 	"license": "ISC",

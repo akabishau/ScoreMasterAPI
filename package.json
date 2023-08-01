@@ -1,29 +1,31 @@
 {
-  "name": "score-master-api",
-  "version": "0.0.1",
-  "description": "backend service for corresponding web and mobile apps",
-  "main": "server.js",
-  "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
-  },
-  "author": "Aleksey Kabishau",
-  "license": "ISC",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.6",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "http-status-codes": "^2.2.0",
-    "jsonwebtoken": "^9.0.1",
-    "mongoose": "^7.3.4",
-    "passport": "^0.6.0",
-    "passport-http-bearer": "^1.0.1",
-    "passport-jwt": "^4.0.1",
-    "validator": "^13.9.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.9",
-    "prettier": "^3.0.0"
-  }
+	"name": "score-master-api",
+	"version": "0.0.1",
+	"description": "backend service for corresponding web and mobile apps",
+	"main": "server.js",
+	"scripts": {
+		"start": "node src/server.js",
+		"dev": "nodemon src/server.js",
+		"test": "node tests/test.js"
+	},
+	"author": "Aleksey Kabishau",
+	"license": "ISC",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"cookie-parser": "^1.4.6",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"http-status-codes": "^2.2.0",
+		"jsonwebtoken": "^9.0.1",
+		"mongoose": "^7.3.4",
+		"passport": "^0.6.0",
+		"passport-http-bearer": "^1.0.1",
+		"passport-jwt": "^4.0.1",
+		"validator": "^13.9.0"
+	},
+	"devDependencies": {
+		"husky": "^8.0.3",
+		"nodemon": "^2.0.9",
+		"prettier": "^3.0.0"
+	}
 }

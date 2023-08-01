@@ -1,0 +1,21 @@
+# Ignore node_modules and other generated directories
+node_modules/
+build/
+dist/
+out/
+coverage/
+.tmp/
+logs/
+.cache/
+lib/
+
+# Ignore specific files
+*.min.js
+*.map
+
+# Ignore config files
+*.env
+*.json
+
+# Ingnore Public folder
+public/

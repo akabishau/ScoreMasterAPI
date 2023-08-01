@@ -9,7 +9,6 @@ const refreshRouter = require('./token-refresh')
 const authenticateUser = require('../middleware/authentication')
 const refreshToken = require('../middleware/token-refresh')
 
-
 router.use('/users', userRouter)
 router.use('/auth', authRouter)
 router.use('/dashboard', authenticateUser, dashboardRouter)

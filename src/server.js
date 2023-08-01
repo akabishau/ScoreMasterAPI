@@ -23,12 +23,13 @@ const env = process.env.NODE_ENV || 'dev'
 const port = process.env.PORT || 3000
 const dbConfig = require(`./db.${env}.js`)
 
-mongoose.connect(dbConfig.url, dbConfig.options)
+mongoose
+  .connect(dbConfig.url, dbConfig.options)
   .then(() => {
     console.log(`Connected to ${env} database`)
     app.listen(port, () => console.log(`Server is up on port ${port}`))
   })
-  .catch((err) => {
+  .catch(err => {
     console.error('Database connection error:', err)
     process.exit(1)
   })

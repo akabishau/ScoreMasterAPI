@@ -11,11 +11,6 @@
 		"lint": "npx prettier --check 'src/**/*.js'",
 		"format": "npx prettier --write 'src/**/*.js'"
 	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "npm test && npx prettier --check ."
-		}
-	},
 	"author": "Aleksey Kabishau",
 	"license": "ISC",
 	"dependencies": {
@@ -33,6 +28,7 @@
 	},
 	"devDependencies": {
 		"husky": "^8.0.3",
+		"jest": "^29.6.2",
 		"nodemon": "^2.0.9",
 		"prettier": "^3.0.0"
 	}

@@ -7,5 +7,4 @@ const handleRegister = require('../controllers/register')
 router.route('/register').post(handleRegister)
 router.route('/login').post(handleLogin)
 
-
 module.exports = router

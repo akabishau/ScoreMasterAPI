@@ -7,7 +7,6 @@ coverage/
 .tmp/
 logs/
 .cache/
-lib/
 
 # Ignore specific files
 *.min.js

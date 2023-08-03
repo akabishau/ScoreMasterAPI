@@ -15,6 +15,7 @@
 	"author": "Aleksey K",
 	"license": "ISC",
 	"dependencies": {
+		"@types/passport": "^1.0.12",
 		"bcryptjs": "^2.4.3",
 		"cookie-parser": "^1.4.6",
 		"dotenv": "^16.3.1",
@@ -28,9 +29,13 @@
 		"validator": "^13.9.0"
 	},
 	"devDependencies": {
+		"@types/cookie-parser": "^1.4.3",
 		"@types/express": "^4.17.17",
+		"@types/jsonwebtoken": "^9.0.2",
 		"@types/mongoose": "^5.11.97",
 		"@types/node": "^20.4.6",
+		"@types/passport-http-bearer": "^1.0.37",
+		"@types/passport-jwt": "^3.0.9",
 		"husky": "^8.0.3",
 		"jest": "^29.6.2",
 		"nodemon": "^2.0.9",

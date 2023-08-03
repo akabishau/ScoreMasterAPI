@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
   console.log('refreshToken Middleware')
   try {
     await passport.authenticate(
-      'refresh-bearer',
+      'refresh-jwt',
       { session: false },
       // callback wheather or not authentication succeeds
       // can include additional info in the callback (custom message, etc.)

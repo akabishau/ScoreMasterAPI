@@ -1,8 +1,10 @@
-const User = require('../models/User')
-const { StatusCodes } = require('http-status-codes')
+// const User = require('../models/User')
+import { User } from '../models/User'
+import { Request, Response, NextFunction } from 'express'
+import { StatusCodes } from 'http-status-codes'
 const generateTokens = require('../lib/jwt')
 
-module.exports = async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   console.log('login')
   try {
     const { email, password } = req.body

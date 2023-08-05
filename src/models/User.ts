@@ -1,8 +1,25 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
-const bcrypt = require('bcryptjs')
+import validator from 'validator'
+import bcrypt from 'bcryptjs'
 
-const userSchema = new mongoose.Schema(
+import mongoose, { Document, Schema, Model, model } from 'mongoose'
+
+interface IUser extends Document {
+  name: string
+  email: string
+  password: string
+  refreshToken: string
+}
+
+interface IUserDocument extends IUser, Document {
+  // instance methods
+  isValidPassword(password: string): Promise<boolean>
+}
+
+interface IUserModel extends Model<IUserDocument> {
+  // static methods
+}
+
+const userSchema = new Schema<IUserDocument, IUserModel>(
   {
     name: {
       type: String,
@@ -21,15 +38,15 @@ const userSchema = new mongoose.Schema(
       // stopOnFirstError
       validate: [
         {
-          validator: value => validator.isEmail(value),
+          validator: (value: string) => validator.isEmail(value),
           message: props => `${props.value} is not a valid email address`
         },
         {
-          validator: value => value.length <= 100,
+          validator: (value: string) => value.length <= 100,
           message: 'Email must be less than 100 characters'
         }
       ],
-      set: value => value.toLowerCase(),
+      set: (value: string) => value.toLowerCase(),
       trim: true
     },
     password: {
@@ -47,6 +64,9 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+// userSchema static methods
+// userSchema instance methods
+
 userSchema.pre('save', async function (next) {
   console.log('userSchema.pre(save)')
   // hash password before saving
@@ -57,14 +77,16 @@ userSchema.pre('save', async function (next) {
       this.password = await bcrypt.hash(this.password, salt)
     } catch (error) {
       console.log(error)
-      return next(error)
+      return next(error as Error)
     }
   }
   console.log('other presave actions completed')
   next()
 })
 
-userSchema.methods.isValidPassword = async function (password) {
+userSchema.methods.isValidPassword = async function (
+  password: string
+): Promise<boolean> {
   try {
     return await bcrypt.compare(password, this.password)
   } catch (err) {
@@ -72,6 +94,6 @@ userSchema.methods.isValidPassword = async function (password) {
   }
 }
 
-const User = mongoose.model('User', userSchema)
+const User: IUserModel = model<IUserDocument, IUserModel>('User', userSchema)
 
-module.exports = User
+export { User, IUserDocument }

@@ -9,8 +9,8 @@
 		"build": "tsc",
 		"prepare": "husky install",
 		"test": "npx jest",
-		"lint": "npx prettier --check 'src/**/*.js'",
-		"format": "npx prettier --write 'src/**/*.js'"
+		"lint": "npx prettier --check 'src/**/*.{.js,ts}'",
+		"format": "npx prettier --write 'src/**/*.{.js,ts}'"
 	},
 	"author": "Aleksey K",
 	"license": "ISC",
@@ -29,6 +29,7 @@
 		"validator": "^13.9.0"
 	},
 	"devDependencies": {
+		"@types/bcryptjs": "^2.4.2",
 		"@types/cookie-parser": "^1.4.3",
 		"@types/express": "^4.17.17",
 		"@types/jsonwebtoken": "^9.0.2",
@@ -36,6 +37,7 @@
 		"@types/node": "^20.4.6",
 		"@types/passport-http-bearer": "^1.0.37",
 		"@types/passport-jwt": "^3.0.9",
+		"@types/validator": "^13.9.0",
 		"husky": "^8.0.3",
 		"jest": "^29.6.2",
 		"nodemon": "^2.0.9",

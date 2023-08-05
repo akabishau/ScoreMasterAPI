@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router()
 
-const userRouter = require('./users')
+import userRouter from './users'
 const authRouter = require('./authentication')
 const dashboardRouter = require('./dashboard')
 const refreshRouter = require('./token-refresh')

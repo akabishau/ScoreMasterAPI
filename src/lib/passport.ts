@@ -1,7 +1,7 @@
 import passport from 'passport'
 import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt'
 
-const User = require('../models/User')
+import { User } from '../models/User'
 
 export default function () {
   // JWT Strategy - Access token
@@ -14,6 +14,7 @@ export default function () {
     jwtAccessTokenOptions,
     async (jwtPayload, done) => {
       // done - Node.js convention of using (error, result)
+      console.log('jwtCookieStrategy')
       try {
         const user = await User.findById(jwtPayload.userId)
         if (user) {

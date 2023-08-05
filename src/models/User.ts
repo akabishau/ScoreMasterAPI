@@ -1,9 +1,9 @@
 import validator from 'validator'
 import bcrypt from 'bcryptjs'
 
-import mongoose, { Document, Schema, Model, model } from 'mongoose'
+import { Document, Schema, Model, model } from 'mongoose'
 
-interface IUser extends Document {
+interface IUser {
   name: string
   email: string
   password: string
@@ -96,4 +96,4 @@ userSchema.methods.isValidPassword = async function (
 
 const User: IUserModel = model<IUserDocument, IUserModel>('User', userSchema)
 
-export { User, IUserDocument }
+export { User, IUser, IUserDocument }

@@ -3,10 +3,12 @@ const router = express.Router()
 
 import userRouter from './users'
 import authRouter from './authentication'
-const dashboardRouter = require('./dashboard')
+// const dashboardRouter = require('./dashboard')
+import dashboardRouter from './dashboard'
 const refreshRouter = require('./token-refresh')
 
-const authenticateUser = require('../middleware/authentication')
+// const authenticateUser = require('../middleware/authentication')
+import authenticateUser from '../middleware/authentication'
 const refreshToken = require('../middleware/token-refresh')
 
 router.use('/users', userRouter)

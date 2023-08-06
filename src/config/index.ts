@@ -19,3 +19,14 @@ export const config = {
     port: SERVER_PORT
   }
 }
+
+export const tokenConfig = {
+  accessToken: {
+    secret: process.env.ACCESS_TOKEN_SECRET || '',
+    expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN || '5m'
+  },
+  refreshToken: {
+    secret: process.env.REFRESH_TOKEN_SECRET || '',
+    expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN || '1h'
+  }
+}

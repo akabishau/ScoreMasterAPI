@@ -2,7 +2,7 @@
 import { User } from '../models/User'
 import { Request, Response, NextFunction } from 'express'
 import { StatusCodes } from 'http-status-codes'
-const generateTokens = require('../lib/jwt')
+import generateTokens from '../lib/jwt'
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   console.log('login')

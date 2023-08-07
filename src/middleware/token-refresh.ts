@@ -1,19 +1,20 @@
-const passport = require('passport')
-const { StatusCodes } = require('http-status-codes')
+import passport from 'passport'
+import { StatusCodes } from 'http-status-codes'
+import { Request, Response, NextFunction } from 'express'
 
-module.exports = async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   console.log('refreshToken Middleware')
   try {
     await passport.authenticate(
-      'refresh-bearer',
+      'refresh-jwt',
       { session: false },
       // callback wheather or not authentication succeeds
       // can include additional info in the callback (custom message, etc.)
-      (err, user) => {
+      (err: Error, user: Express.User) => {
         console.log('refreshToken callback')
         if (err) {
           // if token is expired/invalid, pass error to error-handler middleware
-          err.status = StatusCodes.UNAUTHORIZED
+          // err.status = StatusCodes.UNAUTHORIZED
           return next(err)
         }
 
@@ -28,7 +29,7 @@ module.exports = async (req, res, next) => {
       }
     )(req, res, next)
   } catch (err) {
-    console.log('refresh token middleware', err.message)
+    console.log('refresh token middleware error')
     next(err)
   }
 }

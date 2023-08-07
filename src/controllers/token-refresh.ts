@@ -1,10 +1,12 @@
-const { StatusCodes } = require('http-status-codes')
-const generateTokens = require('../lib/jwt')
+import { StatusCodes } from 'http-status-codes'
+import generateTokens from '../lib/jwt'
+import { Request, Response, NextFunction } from 'express'
+import { IUserDocument } from '../models/User'
 
-module.exports = async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     console.log('refreshToken controller')
-    const user = req.user
+    const user = req.user as IUserDocument
     const tokens = generateTokens(user)
     user.refreshToken = tokens.refreshToken
     await user.save()
@@ -18,7 +20,7 @@ module.exports = async (req, res, next) => {
       }
     })
   } catch (err) {
-    console.log('refresh token controller', err.message)
+    console.log('refresh token controller error')
     next(err)
   }
 }

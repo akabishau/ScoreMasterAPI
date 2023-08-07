@@ -3,17 +3,15 @@ const router = express.Router()
 
 import userRouter from './users'
 import authRouter from './authentication'
-// const dashboardRouter = require('./dashboard')
 import dashboardRouter from './dashboard'
-const refreshRouter = require('./token-refresh')
+import refreshRouter from './token-refresh'
 
-// const authenticateUser = require('../middleware/authentication')
 import authenticateUser from '../middleware/authentication'
-const refreshToken = require('../middleware/token-refresh')
+import handleTokenRefresh from '../middleware/token-refresh'
 
 router.use('/users', userRouter)
 router.use('/auth', authRouter)
 router.use('/dashboard', authenticateUser, dashboardRouter)
-router.use('/refresh-token', refreshToken, refreshRouter)
+router.use('/refresh-token', handleTokenRefresh, refreshRouter)
 
 export default router

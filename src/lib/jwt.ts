@@ -1,17 +1,13 @@
 import jwt from 'jsonwebtoken'
 import { tokenConfig } from '../config'
-
-interface UserInfo {
-  _id: string
-  name: string
-}
+import { IUserDocument } from '../models/User'
 
 interface Tokens {
   accessToken: string
   refreshToken: string
 }
 
-export default function (user: UserInfo): Tokens {
+export default function (user: IUserDocument): Tokens {
   const payload = {
     userId: user._id,
     name: user.name
@@ -27,6 +23,7 @@ export default function (user: UserInfo): Tokens {
     tokenConfig.accessToken.secret,
     accessTokenOptions
   )
+
   const refreshToken = jwt.sign(
     payload,
     tokenConfig.refreshToken.secret,

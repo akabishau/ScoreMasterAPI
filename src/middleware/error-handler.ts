@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express'
-import { StatusCodes } from 'http-status-codes'
 import AppError from '../errors/AppError'
 
 export default function (
@@ -8,14 +7,17 @@ export default function (
   res: Response,
   next: NextFunction
 ) {
+  const includeContext = process.env.NODE_ENV === 'development'
+
   if (err instanceof AppError) {
     err.log()
+
     const { statusCode, message, context } = err
     const errorResponse = {
       status: 'error',
       statusCode,
       message,
-      ...(context && { context })
+      ...(includeContext && { context })
     }
     return res.status(statusCode).json(errorResponse)
   }
@@ -24,8 +26,8 @@ export default function (
   const defaultErrorResponse = {
     status: 'error',
     statusCode: 500,
-    message: 'Internal Server Error'
+    message: 'Internal Server Error',
+    ...(includeContext && { context: err })
   }
-  console.log('NOT AppError!!!!!')
   res.status(500).json(defaultErrorResponse)
 }

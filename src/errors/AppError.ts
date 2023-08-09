@@ -40,20 +40,20 @@ class AppError extends Error {
     return new AppError(statusCode, message, context)
   }
 
-  static badRequest(message?: string) {
-    return new AppError(AppError.BAD_REQUEST, message)
+  static badRequest(message?: string, context?: any) {
+    return new AppError(AppError.BAD_REQUEST, message, context)
   }
 
-  static unauthorized(message?: string) {
-    return new AppError(AppError.UNAUTHORIZED, message)
+  static unauthorized(message?: string, context?: any) {
+    return new AppError(AppError.UNAUTHORIZED, message, context)
   }
 
-  static forbidden(message?: string) {
-    return new AppError(AppError.FORBIDDEN)
+  static forbidden(message?: string, context?: any) {
+    return new AppError(AppError.FORBIDDEN, context)
   }
 
-  static notFound(message?: string) {
-    return new AppError(AppError.NOT_FOUND, message)
+  static notFound(message?: string, context?: any) {
+    return new AppError(AppError.NOT_FOUND, message, context)
   }
 
   static internal(message?: string) {

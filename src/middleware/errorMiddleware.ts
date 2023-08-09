@@ -9,6 +9,7 @@ export default function (
   next: NextFunction
 ) {
   if (err instanceof AppError) {
+    err.log()
     const { statusCode, message, context } = err
     const errorResponse = {
       status: 'error',
@@ -16,7 +17,7 @@ export default function (
       message,
       ...(context && { context })
     }
-    res.status(statusCode).json(errorResponse)
+    return res.status(statusCode).json(errorResponse)
   }
 
   console.error('Unhandled Error:', err)
@@ -25,5 +26,6 @@ export default function (
     statusCode: 500,
     message: 'Internal Server Error'
   }
+  console.log('NOT AppError!!!!!')
   res.status(500).json(defaultErrorResponse)
 }

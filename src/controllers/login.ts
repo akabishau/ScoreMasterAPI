@@ -1,7 +1,6 @@
 // const User = require('../models/User')
 import { User } from '../models/User'
 import { Request, Response, NextFunction } from 'express'
-import { StatusCodes } from 'http-status-codes'
 import generateTokens from '../lib/jwt'
 import AppError from '../errors/AppError'
 
@@ -28,7 +27,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     await user.save()
 
     res.cookie('accessToken', tokens.accessToken, { httpOnly: true }) // sameSite: 'none', secure: true
-    res.status(StatusCodes.OK).json({
+    res.status(200).json({
       refreshToken: user.refreshToken,
       user: {
         id: user._id,

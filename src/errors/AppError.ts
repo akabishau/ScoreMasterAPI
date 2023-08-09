@@ -28,13 +28,12 @@ class AppError extends Error {
 
   log() {
     console.error(
-      `${this.timestamp.toISOString()} - ${this.name}
-      ${this.statusCode}: ${this.message}`
+      `${this.timestamp} - ${this.name}: ${this.statusCode} (${this.message})`
     )
 
     if (this.context) console.error('Context:', JSON.stringify(this.context))
 
-    console.error('Stack:', this.stack)
+    console.error('Error Stack:', this.stack)
   }
 
   static create(statusCode: number, message?: string, context?: any) {

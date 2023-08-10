@@ -49,15 +49,15 @@ class AppError extends Error {
   }
 
   static forbidden(message?: string, context?: any) {
-    return new AppError(AppError.FORBIDDEN, context)
+    return new AppError(AppError.FORBIDDEN, message, context)
   }
 
   static notFound(message?: string, context?: any) {
     return new AppError(AppError.NOT_FOUND, message, context)
   }
 
-  static internal(message?: string) {
-    return new AppError(AppError.INTERNAL, message)
+  static internal(message?: string, context?: any) {
+    return new AppError(AppError.INTERNAL, message, context)
   }
 }
 
